@@ -51,25 +51,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT, \
                              KC_LCTL,KC_LALT, KC_LGUI, KC_SPC,   KC_ENT,  MO(1), MO(2), TT(3) \
 ),
-/* SYMBOLS
+/* SYMBOLS function
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |      |      |      |      |      |                    |      |      |      |   (  |   )  |      |
+ * |      |      |      |      |      |      |                    |   [  |   ]  |   =  |   &  |   -  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |                    |      |      |   \  |   [  |   ]  |   =  |
+ * |      |      |  ⬆️  |      |      |      |                    |   (  |   )  |      |      |   /  |  \   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------.    ,-------|      |      |   |  |   {  |   }  |   "  |
+ * |      |  ⬅️  |  ⬇️  |  ➡️ |      |      |-------.    ,-------|   {  |   }  |      |      |   :  |  "   |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------|    |-------|      |      |      |   <  |   >  |   ;  |
+ * |      |      |      |      |      |      |-------|    |-------|   <  |   >  |      |   !  |   ?  |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   |      |      |      | /       /       \      \  |      |      |      |
  *                   |      |      |      |/       /         \      \ |      |      |      |
  *                   `-------------------''-------'           '------''--------------------'
  */
 [_LOWER] = LAYOUT( \
-  _______, _______, _______, _______, _______, _______,                   _______, _______, _______, KC_LPRN, KC_RPRN, _______,\
-  _______, _______, _______, _______, _______, _______,                   _______, _______, KC_BSLS, KC_LBRC, KC_RBRC, KC_EQL, \
-  _______, _______, _______, _______, _______, _______,                   _______, _______, KC_PIPE, KC_LCBR, KC_RCBR, KC_DQUO, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_LT,   KC_GT,   KC_COLN, \
+  _______, _______, _______, _______, _______, _______,                   KC_LBRC, KC_RBRC, KC_EQL, KC_AMPR, KC_MINS, _______,\
+  _______, _______, KC_UP,   _______, _______, _______,                   KC_LPRN, KC_RPRN, _______, _______, KC_SLSH, KC_BSLS, \
+  _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______,                   KC_LCBR, KC_RCBR, _______, _______, KC_COLN, KC_DQUO, \
+  _______, _______, _______, _______, _______, _______, _______, _______, KC_LT,   KC_GT,   _______, KC_EXLM, KC_QUES, _______, \
                              _______, _______, _______, _______, _______, _______, _______, _______\
 ),
 /* MEDIA
@@ -160,14 +160,14 @@ void matrix_scan_user(void) { iota_gfx_task(); }
 void matrix_render_user(struct CharacterMatrix *matrix) {
     if (is_master) {
         // If you want to change the display of OLED, you need to change here
-        matrix_write_ln(matrix, read_layer_state());
         // matrix_write_ln(matrix, read_keylog());
 
-        matrix_write_ln(matrix, read_mode_icon(keymap_config.swap_lalt_lgui));
+        matrix_write(matrix, read_logo());
         // matrix_write_ln(matrix, read_host_led_state());
         // matrix_write_ln(matrix, read_timelog());
     } else {
-        matrix_write(matrix, read_logo());
+        matrix_write_ln(matrix, read_layer_state());
+        // matrix_write_ln(matrix, read_mode_icon(keymap_config.swap_lalt_lgui));
     }
 }
 
