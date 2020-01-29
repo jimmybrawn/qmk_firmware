@@ -19,14 +19,13 @@ extern uint8_t is_master;
 #define _LOWER 1
 #define _RAISE 2
 #define _ADJUST 3
-static bool bsdel_mods = false;
+
 
 enum custom_keycodes {
     QWERTY = SAFE_RANGE,
     LOWER,
     RAISE,
     ADJUST,
-    M_BSDEL
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -47,11 +46,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
  [_QWERTY] = LAYOUT( \
-  KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    M_BSDEL, \
-  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS, \
-  KC_ESC,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
-  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT, \
-                             KC_LCTL,KC_LALT, KC_LGUI, KC_SPC,   KC_ENT,  MO(1), MO(2), TT(3) \
+  KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                        KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC, \
+  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                        KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS, \
+  KC_ESC,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                        KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
+  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,    KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT, \
+                             KC_LCTL, KC_LALT, KC_LGUI, KC_SPC,   KC_ENT,   MO(1),   MO(2),   TT(3) \
 ),
 /* SYMBOLS function
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -68,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                   `-------------------''-------'           '------''--------------------'
  */
 [_LOWER] = LAYOUT( \
-  _______, _______, _______, _______, _______, _______,                   KC_LBRC, KC_RBRC, KC_EQL, KC_AMPR, KC_MINS, _______,\
+  _______, _______, _______, _______, _______, _______,                   KC_LBRC, KC_RBRC, KC_EQL,  KC_AMPR, KC_MINS, _______,\
   _______, _______, KC_UP,   _______, _______, _______,                   KC_LPRN, KC_RPRN, _______, _______, KC_SLSH, KC_BSLS, \
   _______, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______,                   KC_LCBR, KC_RCBR, _______, _______, KC_COLN, KC_DQUO, \
   _______, _______, _______, _______, _______, _______, _______, _______, KC_LT,   KC_GT,   _______, KC_EXLM, KC_QUES, _______, \
@@ -81,8 +80,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |   ~  |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |    0 |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |-------.    ,-------|   F7 |  F8  |  F9  |  F10 |  F11 |  F12 |
- * |------+------+------+------+------+------|       |    |  F12  |------+------+------+------+------+------|
- * |      |  🔀 |   ✅ | 🔅🔆 |  🌈 |  ✨   |-------|    |-------|   +  |   -  |   =  |   [  |   ]  | PgeDo|
+ * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
+ * |      |  🔀 |   ✅ | 🔅🔆 |  🌈 |  ✨   |-------|    |-------|   +  |   -  |   =  |   [  |   ]  |     |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   |      |      |      | /       /       \      \  |      |      |      |
  *                   |      |      |      |/       /         \      \ |      |      |      |
@@ -91,10 +90,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_RAISE] = LAYOUT( \
   KC_BRMD, KC_BRMU, _______, _______, SGUI(KC_4), _______,                  KC__MUTE, KC__VOLDOWN, KC__VOLUP, KC_MRWD, KC_MFFD, KC_MPLY,\
-  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,     KC_7,        KC_8,      KC_9,    KC_0,    _______, \
-  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                    KC_F7,    KC_F8,       KC_F9,     KC_F10,  KC_F11,  KC_F12, \
-  _______, RGB_MOD, RGB_SAI, RGB_VAI, RGB_HUI, RGB_TOG, _______, KC_F12, KC_PLUS,  KC_MINS,     KC_EQL,    KC_LBRC, KC_RBRC, KC_PGDN, \
-                             _______, _______, _______, _______, _______, _______, _______, _______\
+  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,       KC_5,                     KC_6,     KC_7,        KC_8,      KC_9,    KC_0,    _______, \
+  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,      KC_F6,                    KC_F7,    KC_F8,       KC_F9,     KC_F10,  KC_F11,  KC_F12, \
+  _______, RGB_MOD, RGB_SAI, RGB_VAI, RGB_HUI,    RGB_TOG, _______, _______, KC_PLUS,  KC_MINS,     KC_EQL,    KC_LBRC, KC_RBRC, _______, \
+                             _______, _______,    _______, _______, _______, _______, _______, _______\
 ),
 
 /* ADJUST
@@ -197,25 +196,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 
     switch (keycode) {
-        case M_BSDEL: {
-            uint8_t kc = KC_BSPC;
-
-            if (record->event.pressed) {
-                if (keyboard_report->mods) {
-                    kc = KC_DEL;
-                }
-                register_code (kc);
-                bsdel_mods = keyboard_report->mods;
-            }
-            else {
-                if (bsdel_mods) {
-                    kc = KC_DEL;
-                }
-                unregister_code (kc);
-            }
-        }
-        return false;
-        break;
         case QWERTY:
             if (record->event.pressed) {
                 set_single_persistent_default_layer(_QWERTY);
