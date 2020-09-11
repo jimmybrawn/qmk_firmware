@@ -27,7 +27,7 @@ const char *read_layer_state(void) {
             snprintf(layer_state_str, sizeof(layer_state_str), "ADJUST");
             break;
         default:
-            snprintf(layer_state_str, sizeof(layer_state_str), "404");
+            snprintf(layer_state_str, sizeof(layer_state_str), "404/WINDOWS");
     }
 
     return layer_state_str;

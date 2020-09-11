@@ -25,8 +25,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* Select hand configuration */
 
 // #define MASTER_LEFT
-#define MASTER_RIGHT
-// #define EE_HANDS
+// #define MASTER_RIGHT
+//flash on each side with make lily58:zbra:avrdude-split-right/left
+#define EE_HANDS
 
 #define SSD1306OLED
 
@@ -44,10 +45,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGBLIGHT_SAT_STEP 17
 #define RGBLIGHT_VAL_STEP 17
 
-// Underglow
+#define RGBLIGHT_LAYERS
 
+// Underglow
+//
 // #undef RGBLED_NUM
 // #define RGBLED_NUM 16    // Number of LEDs
 // #define RGBLIGHT_ANIMATIONS
-// #define RGBLIGHT_SLEEP
-
+#define RGBLIGHT_SLEEP
